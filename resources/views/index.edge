@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang=en>
+    <head>
+        <meta charset=utf-8>
+        <meta http-equiv=X-UA-Compatible content="IE=edge">
+        <meta name=viewport content="width=device-width,initial-scale=1">
+        <link rel=icon href=/favicon.ico>
+        <title>SRS RECEIVING</title>
+        <script src=/babel.min.js></script>
+        <link href=/assets/my_script.js rel=preload as=script>
+        <link href=/assets/my_script_chunk.js rel=preload as=script>
+        <link href=/assets/my_style.css rel=preload as=style>
+        <link href=/assets/my_style.css rel=stylesheet>
+    </head>
+    <body>
+        <noscript><strong>We're sorry but api_main_receiving doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
+        <div id=app></div>
+        <script>window.url = '{{ APP_URL }}/api/'</script>
+        <script>window.showRequest = true </script>
+        <script>
+          var session = JSON.parse(localStorage.getItem('vue-session-key'))
+          function idleLogout() {
+              var t;
+              window.onload = resetTimer;
+              window.onmousemove = resetTimer;
+              window.onmousedown = resetTimer;  // catches touchscreen presses as well      
+              window.ontouchstart = resetTimer; // catches touchscreen swipes as well 
+              window.onclick = resetTimer;      // catches touchpad clicks as well
+              window.onkeypress = resetTimer;   
+              window.addEventListener('scroll', resetTimer, true); // improved; see comments
+
+              function doLogout() {
+                  // your function for too long inactivity goes here
+                  if(typeof session.user_id !== 'undefined') {
+                    alert('Automatic Logout Dahil na detect ng aming system na ikaw ay walang ginagawang activity sa system na ito')
+                    $(".icon-switch2").trigger("click"); 
+                  } else {
+                    console.log(session.user_id)
+                  }
+                // window.location.href = window.url+'purchaser/receive_po/logout?user_id='+session.user_id;
+              }
+
+              function resetTimer() {
+                  clearTimeout(t);
+                  var minutes = 60*1000*10
+                  t = setTimeout(doLogout,  minutes);  //60000 time is in milliseconds
+              }
+          }
+          idleLogout();
+        </script>
+        <script src=/assets/my_script_chunk.js></script>
+        <script src=/assets/my_script.js></script>
+    </body>
+    </html>

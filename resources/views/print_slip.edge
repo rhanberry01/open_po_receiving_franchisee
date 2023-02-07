@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PRINT SLIP</title>
+</head>
+<body>
+    @each(page in range(2))   
+    <table >
+        <tr>
+            <th ></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td  colspan="3"><font size="2" face="arial"><b>San Roque Supermarket Retail Systems Inc.</b></font></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="3"><font size="1">REG.TIN# 007-492-840-000</font></td>
+        </tr>
+        <tr><td colspan="3"></td></tr>
+        <tr><td colspan="3"></td></tr>
+        @if(page == 1)
+        <tr>
+            <td align="center" colspan="3"><font size="2">-DUPLICATE COPY-</font></td>
+        </tr>
+        @else
+        <tr>
+            <td align="center" colspan="3"><font size="2">-ORIGINAL COPY-</font></td>
+        </tr>
+        @endif
+        <tr><td colspan="3"></td></tr>
+        <tr><td colspan="3"></td></tr>
+        <tr>
+            <td align="center" colspan="3"><font size="2">Transfer Slip</td>
+        </tr>
+        <tr>
+        <td align="center" colspan="3"><font size="2">Transfer # : {{ trans_no }}</td>
+        </tr>
+        <tr><td colspan="3"></td></tr>
+        <tr><td colspan="3"></td></tr>
+        <tr>
+            <td colspan="3"><font size="2">Date Created: {{ transfer_slip_header.date_created }} </font></td>
+        </tr>
+        <tr>
+            <td colspan="3"><font size="2">Transfer Out Date : {{ transfer_slip_header.date_created }} </font></td>
+        </tr>
+        <tr>
+            <td colspan="3">---------------------------------------------------</td>
+        </tr>
+        <tr>
+            <td><font size="2" colspan="3">From: {{ transfer_slip_header.branch_from }} </font></td>
+        </tr>
+        <tr>
+            <td><font size="2" colspan="3">To: {{ transfer_slip_header.branch_to }} </font></td>
+        </tr>
+        <tr><td colspan="3"></td></tr>
+        <tr><td colspan="3"></td></tr>
+        <tr>
+            <td width="150"><font size="2">PRODUCT</font></td>
+            <td><font size="2">UOM</font></td>
+            <td><font size="2">QTY</font></td>
+        </tr>
+        @each(row in transfer_slip_item)
+        <tr>
+            <td><font size="1"> {{row.description}} </font></td>
+            <td><font size="1">{{row.uom}}</font></td>
+            <td><font size="1">{{row.actual_qty_out}}</font></td>
+        </tr>
+        @endeach
+        <td colspan="3">-----------------------------------------------------</td>
+        <tr>
+            <td></td>
+            <td align="right"><font size="2">TOTAL QTY:</font></td>
+            <td  align="left"><font size="2">{{ total_qty }}</font></td>
+        </tr>
+        <td colspan="3">---------------------------------------------------</td>
+        <tr>
+            <td align="left" colspan="3"><font size="2">Prepared by : {{ transfer_slip_header.requested_by }}</font></td>
+        </tr>
+        <tr><td colspan="3"></td></tr>
+        <tr>
+            <td align="left" colspan="3"><font size="2">Witnessed by : ___________________ </font></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="3"><font size="2">{{ transfer_slip_header.checked_by }}</font></td>
+        </tr>
+        <tr><td colspan="3"></td></tr>
+        <tr>
+            <td align="left" colspan="3"><font size="2">Delivered by : ___________________ </font></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="3"><font size="2">{{ transfer_slip_header.delivered_by }}</font></td>
+        </tr>
+        <tr>
+            <td align="left" colspan="3"><font size="2"> Received by : ___________________</font></td>
+        </tr>
+        <tr><td colspan="3"></td></tr>
+        <tr><td colspan="3"></td></tr>
+        <tr><td colspan="3"></td></tr>
+        <tr><td colspan="3"></td></tr>
+        <tr><td colspan="3"></td></tr>
+        <tr>
+            <td colspan="3">---------------------------------------------------</td>
+        </tr>
+    </table>
+    @endeach
+
+</body>
+</html>
